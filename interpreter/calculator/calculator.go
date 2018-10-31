@@ -154,6 +154,34 @@ func CalculateFunction(arg float64, nodeType parser.NodeType) (float64, error) {
 		result = math.Cos(arg)
 	case parser.NFnTan:
 		result = math.Tan(arg)
+	case parser.NFnAbs:
+		result = math.Abs(arg)
+	case parser.NFnSignbit:
+		if math.Signbit(arg) {
+			result = 1
+		} else {
+			result = 0
+		}
+	case parser.NFnCeil:
+		result = math.Ceil(arg)
+	case parser.NFnFloor:
+		result = math.Floor(arg)
+	case parser.NFnTrunc:
+		result = math.Trunc(arg)
+	case parser.NFnCbrt:
+		result = math.Cbrt(arg)
+	case parser.NFnAsin:
+		result = math.Asin(arg)
+	case parser.NFnAcos:
+		result = math.Acos(arg)
+	case parser.NFnAtan:
+		result = math.Atan(arg)
+	case parser.NFnLog:
+		result = math.Log(arg)
+	case parser.NFnLog2:
+		result = math.Log2(arg)
+	case parser.NFnLog10:
+		result = math.Log10(arg)
 	}
 
 	return result, nil

@@ -2,6 +2,7 @@ package interpreter
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/relnod/calcgo/interpreter/calculator"
 	"github.com/relnod/calcgo/interpreter/optimizer"
@@ -50,6 +51,25 @@ func NewInterpreterFromAST(ast parser.IAST) *Interpreter {
 // SetVar sets the value of a variable
 func (i *Interpreter) SetVar(name string, value float64) {
 	i.vars[name] = value
+}
+
+// GetVar return the value of a variable
+func (i *Interpreter) GetVar(name string) (float64, error) {
+	if v, ok := i.vars[name]; ok {
+		return v, nil
+	} else {
+		return 0, errors.New(fmt.Sprintf("variable %s does not exist", name))
+	}
+}
+
+// GetVars returns the values of all variables
+func (i *Interpreter) GetVars() map[string]float64 {
+	return i.vars
+}
+
+// GetAst sets the value of a variable
+func (i *Interpreter) GetAst() parser.IAST {
+	return i.ast
 }
 
 // EnableOptimizer enables optimization of the ast.

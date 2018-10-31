@@ -2,6 +2,7 @@ package lexer
 
 import (
 	"io"
+	"regexp"
 
 	"github.com/relnod/calcgo/token"
 )
@@ -194,7 +195,7 @@ func lexNumber(l *Lexer) token.Token {
 			continue
 		}
 
-		if b == '.' {
+		if isDot(b) {
 			return lexDecimal(l)
 		}
 
@@ -328,7 +329,7 @@ func lexVariableOrFunction(l *Lexer) token.Token {
 			break
 		}
 
-		if isLetter(b) {
+		if isLetter(b) || isDot(b) || isDigit(b) || isUnderscore(b) {
 			continue
 		}
 
@@ -347,6 +348,30 @@ func lexVariableOrFunction(l *Lexer) token.Token {
 				return l.createEmpty(token.Cos)
 			case "tan(":
 				return l.createEmpty(token.Tan)
+			case "abs(":
+				return l.createEmpty(token.Abs)
+			case "signbit(":
+				return l.createEmpty(token.Signbit)
+			case "ceil(":
+				return l.createEmpty(token.Ceil)
+			case "floor(":
+				return l.createEmpty(token.Floor)
+			case "trunc(":
+				return l.createEmpty(token.Trunc)
+			case "cbrt(":
+				return l.createEmpty(token.Cbrt)
+			case "asin(":
+				return l.createEmpty(token.Asin)
+			case "acos(":
+				return l.createEmpty(token.Acos)
+			case "atan(":
+				return l.createEmpty(token.Atan)
+			case "log(":
+				return l.createEmpty(token.Log)
+			case "log2(":
+				return l.createEmpty(token.Log2)
+			case "log10(":
+				return l.createEmpty(token.Log10)
 			default:
 				return l.create(token.UnkownFunktion)
 			}
@@ -354,8 +379,11 @@ func lexVariableOrFunction(l *Lexer) token.Token {
 
 		return l.createSingle(token.InvalidCharacterInVariable)
 	}
-
-	return l.create(token.Var)
+	r := regexp.MustCompile(`[[:alpha:]][[:word:]]{0,}(?:\.[[:alpha:]][[:word:]]{0,}){0,1}`)
+	if r.Match(l.buf.All()) {
+		return l.create(token.Var)
+	}
+	return l.createSingle(token.InvalidCharacterInVariable)
 }
 
 // isWhiteSpace checks if b is a whitespace character.
@@ -381,4 +409,14 @@ func isBinDigit(b byte) bool {
 // isLetter checks if a is a letter.
 func isLetter(b byte) bool {
 	return b >= 'a' && b <= 'z'
+}
+
+// isDot checks if a is .
+func isDot(b byte) bool {
+	return b == '.'
+}
+
+// isDot checks if a is _
+func isUnderscore(b byte) bool {
+	return b == '_'
 }

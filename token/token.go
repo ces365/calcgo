@@ -35,10 +35,22 @@ const (
 
 	functionBeg
 	// Functions
-	Sqrt // "sqrt("
-	Sin  // "sin("
-	Cos  // "cos("
-	Tan  // "tan("
+	Sqrt    // "sqrt("
+	Sin     // "sin("
+	Cos     // "cos("
+	Tan     // "tan("
+	Abs     // "abs("
+	Signbit // "signbit("
+	Ceil    // "ciel("
+	Floor   // "floor("
+	Trunc   // "trunc("
+	Cbrt    // "cbrt("
+	Asin    // "asin("
+	Acos    // "acos("
+	Atan    // "atan("
+	Log     // "log("
+	Log2    // "log2("
+	Log10   // "log10("
 	UnkownFunktion
 	functionEnd
 
@@ -72,10 +84,22 @@ var tokens = [...]string{
 	Xor:   "^",
 	And:   "&",
 
-	Sqrt: "sqrt",
-	Sin:  "sin",
-	Cos:  "cos",
-	Tan:  "tan",
+	Sqrt:    "sqrt",
+	Sin:     "sin",
+	Cos:     "cos",
+	Tan:     "tan",
+	Abs:     "abs",
+	Signbit: "signbit",
+	Ceil:    "ceil",
+	Floor:   "floor",
+	Trunc:   "trunc",
+	Cbrt:    "cbrt",
+	Asin:    "asin",
+	Acos:    "acos",
+	Atan:    "atan",
+	Log:     "log",
+	Log2:    "log2",
+	Log10:   "log10",
 
 	ParenL: "(",
 	ParenR: ")",

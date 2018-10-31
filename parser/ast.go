@@ -44,6 +44,18 @@ const (
 	NFnSin
 	NFnCos
 	NFnTan
+	NFnAbs
+	NFnSignbit
+	NFnCeil
+	NFnFloor
+	NFnTrunc
+	NFnCbrt
+	NFnAsin
+	NFnAcos
+	NFnAtan
+	NFnLog
+	NFnLog2
+	NFnLog10
 	functionEnd
 )
 
@@ -231,6 +243,30 @@ func getFunctionNodeType(t token.Token) (NodeType, bool) {
 		return NFnCos, true
 	case token.Tan:
 		return NFnTan, true
+	case token.Abs:
+		return NFnAbs, true
+	case token.Signbit:
+		return NFnSignbit, true
+	case token.Ceil:
+		return NFnCeil, true
+	case token.Floor:
+		return NFnFloor, true
+	case token.Trunc:
+		return NFnTrunc, true
+	case token.Cbrt:
+		return NFnCbrt, true
+	case token.Asin:
+		return NFnAsin, true
+	case token.Acos:
+		return NFnAcos, true
+	case token.Atan:
+		return NFnAtan, true
+	case token.Log:
+		return NFnLog, true
+	case token.Log2:
+		return NFnLog2, true
+	case token.Log10:
+		return NFnLog10, true
 	}
 
 	return NInvalidFunction, false
